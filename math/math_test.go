@@ -56,3 +56,26 @@ func TestSumParalel(t *testing.T) {
 		})
 	}
 }
+
+//Table Test (Normal)
+func TestSum(t *testing.T) {
+	for _, row := range table {
+		got := Add(row.x, row.y)
+		if got != row.want {
+			t.Errorf("Test fail! want: '%d', got: '%d'", row.want, got)
+		}
+	}
+}
+
+//Table Test (With Subtest)
+func TestSumSubtest(t *testing.T) {
+	for _, row := range table {
+		testName := fmt.Sprintf("Test %d+%d", row.x, row.y)
+		t.Run(testName, func(t *testing.T) {
+			got := Add(row.x, row.y)
+			if got != row.want {
+				t.Errorf("Test fail! want: '%d', got: '%d'", row.want, got)
+			}
+		})
+	}
+}
